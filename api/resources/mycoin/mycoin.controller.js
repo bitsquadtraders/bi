@@ -102,7 +102,11 @@ module.exports = {
       coin.profit = coin.profit + parseFloat(data.amount);
 
       let wallet = await WalletModel.findOne({ owner: coin.owner });
-      if (wallet) wallet.balance = wallet.balance + data.amount;
+      if (wallet.profit) {
+        wallet.profit = wallet.profit + data.amount;
+      } else {
+        wallet.profit = data.amount;
+      }
 
       await coin.save({ _id: req.params.id }, (err, docs) => {
         if (!err) {
