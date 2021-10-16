@@ -67,15 +67,23 @@ module.exports = {
 
       if (!subtract || subtract == false) {
         coin.balance = coin.balance + data.amount;
-        if (wallet) wallet.balance = wallet.balance + data.amount;
+        if (wallet)
+          wallet.balance = parseFloat(wallet.balance) + parseFloat(data.amount);
       } else {
         coin.balance = coin.balance - data.amount;
-        if (wallet) wallet.balance = wallet.balance - data.amount;
+        if (wallet)
+          wallet.balance = parseFloat(wallet.balance) - parseFloat(data.amount);
       }
 
       await coin.save({ _id: req.params.id }, (err, docs) => {
         if (!err) {
-          return res.status(200).send({ success: 'Balance updated' });
+          if (wallet)
+            wallet.save((err, doc) => {
+              return res.status(200).send({ success: 'Balance updated' });
+            });
+          else {
+            return res.status(200).send({ success: 'Balance updated' });
+          }
         } else {
           return res.status(400).send({ error: err });
         }
@@ -108,7 +116,7 @@ module.exports = {
         else {
           wallet.profit = parseFloat(data.amount);
         }
-        wallet.balance = wallet.balance + data.amount;
+        wallet.balance = parseFloat(wallet.balance) + parseFloat(data.amount);
       }
 
       await coin.save({ _id: req.params.id }, (err, docs) => {
