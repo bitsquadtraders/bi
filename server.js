@@ -55,20 +55,6 @@ app.use((req, res, next) => {
 //   next();
 // });
 
-let allowedDomains = 'https://bitsquadtraders.com,http://localhost:3000';
-const whitelist = allowedDomains.split(',').map((item) => item.trim());
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-};
-
 app.use(express.json());
 app.use(cookieParser());
 
@@ -120,7 +106,12 @@ app.use(limiter);
 app.use(hpp());
 
 // Enable CORS
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: '*',
+    credentials: true
+  })
+);
 
 // // Enable cors
 // app.use(cors({ credentials: true, origin: `http://localhost:3000` }));
