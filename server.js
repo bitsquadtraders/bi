@@ -108,7 +108,7 @@ app.use(hpp());
 // Enable CORS
 app.use(
   cors({
-    origin: 'https://www.bitsquadtraders.com',
+    origin: 'https://bitsquadtraders.com',
     credentials: true,
     methods: ['POST', 'PUT', 'DELETE', 'GET'],
     allowedHeaders: [
