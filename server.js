@@ -106,21 +106,20 @@ app.use(limiter);
 app.use(hpp());
 
 // Enable CORS
-app.use(
-  cors({
-    origin: '*'
-    // credentials: true,
-    // methods: ['POST', 'PUT', 'DELETE', 'GET'],
-    // allowedHeaders: [
-    //   'Origin',
-    //   'X-Requested-With',
-    //   'Content-Type',
-    //   'Content-Length',
-    //   'Content-Disposition',
-    //   'contentSecurityPolicy'
-    // ]
-  })
-);
+app.use(cors());
+// app.use(
+// cors({
+// origin: '*'
+// credentials: true,
+// methods: ['POST', 'PUT', 'DELETE', 'GET'],
+// allowedHeaders: [
+//   'Origin',
+//   'X-Requested-With',
+//   'Content-Type',
+//   'Content-Length',
+//   'Content-Disposition',
+//   'contentSecurityPolicy'
+// ]
 
 // // Enable cors
 // app.use(cors({ credentials: true, origin: `http://localhost:3000` }));
