@@ -1228,20 +1228,24 @@ async function destroy(file) {
 }
 
 const sendTokenResponse = (user, status, res) => {
+  console.log('a');
   const token = user.getSignedJwtToken();
+  console.log('b');
   const options = {
     expires: new Date(Date.now() * 30 * 60 * 60 * 24 * 1000),
     httpOnly: true
   };
+  console.log('c');
 
   if (process.env.NODE_ENV === 'production') {
     options.secure = true;
   }
-
+  console.log('d');
   res
     .status(status)
     .cookie('token', token, options)
     .send({ token, level: user.level });
+  console.log('e');
 };
 
 const emailPassword = async (options) => {
