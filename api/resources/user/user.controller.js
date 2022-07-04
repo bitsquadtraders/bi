@@ -1246,7 +1246,7 @@ const sendTokenResponse = (user, status, res) => {
   console.log('status', status);
   res
     .status(status)
-    .cookie('token', token, options)
+    // .cookie('token', token, options)
     .send({ token, level: user.level });
   console.log('e');
 };
