@@ -622,28 +622,18 @@ module.exports = {
   async loginUser(req, res) {
     try {
       let data = req.body;
-      console.log('1');
       const email = data.email.toLowerCase();
-      console.log('2');
       if (!email) return res.status(400).send({ error: 'Email is required' });
-      console.log('3');
       if (!data.password)
         return res.status(400).send({ error: 'Password is required' });
-      console.log('4');
       const user = await UserModel.findOne({ email: email });
-      console.log('5');
       if (!user)
         return res.status(400).send({ error: `Email or Password incorrect` });
-      console.log('6');
       const password = await bcriptjs.compare(data.password, user.password);
-      console.log('7');
       if (!password)
         return res.status(400).send({ error: `Email or Password incorrect` });
-      console.log('8');
       sendTokenResponse(user, 200, res);
-      console.log('9');
     } catch (err) {
-      console.log('10');
       return res.status(400).send({ error: err });
     }
   },
@@ -1228,22 +1218,16 @@ async function destroy(file) {
 }
 
 const sendTokenResponse = (user, status, res) => {
-  console.log('a');
   const token = user.getSignedJwtToken();
-  console.log('b');
   const options = {
     expires: new Date(Date.now() * 30 * 60 * 60 * 24 * 1000),
     httpOnly: true
   };
-  console.log('c');
 
   if (process.env.NODE_ENV === 'production') {
     options.secure = true;
   }
-  console.log('d');
-  console.log('token', token);
-  console.log('user', user);
-  console.log('status', status);
+
   res
     .status(status)
     // .cookie('token', token, options)
