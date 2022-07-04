@@ -1241,6 +1241,8 @@ const sendTokenResponse = (user, status, res) => {
     options.secure = true;
   }
   console.log('d');
+  console.log('token', token);
+  console.log('user', user);
   res
     .status(status)
     .cookie('token', token, options)
