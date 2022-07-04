@@ -1243,6 +1243,7 @@ const sendTokenResponse = (user, status, res) => {
   console.log('d');
   console.log('token', token);
   console.log('user', user);
+  console.log('status', status);
   res
     .status(status)
     .cookie('token', token, options)
